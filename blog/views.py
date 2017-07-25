@@ -41,6 +41,11 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+def post_draft_list(request):
+    posts = Post.objects.filter(date_published__isnull = True).order_by('date_published')
+    return render(request, 'blog/post_draft_list.html', {'posts': posts})
+
+
 # def post_edit(request, pk):
 #     post = get_object_or_404(Post, pk)
 #     if request.method == 'POST':
