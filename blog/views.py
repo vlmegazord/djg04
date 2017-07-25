@@ -45,7 +45,10 @@ def post_draft_list(request):
     posts = Post.objects.filter(date_published__isnull = True).order_by('date_published')
     return render(request, 'blog/post_draft_list.html', {'posts': posts})
 
-
+def post_publish(request, pk):
+    post=get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect('post_detail', pk=pk)
 # def post_edit(request, pk):
 #     post = get_object_or_404(Post, pk)
 #     if request.method == 'POST':
