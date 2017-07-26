@@ -17,6 +17,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def approved_comments(self):
+        return self.comments.filter(is_approved=True)
+
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', related_name='comments')
     author = models.CharField(max_length=200)
